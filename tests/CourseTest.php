@@ -195,6 +195,37 @@
             //Assert
             $this->assertEquals($test_course, $result);
         }
+
+        function test_getStudent()
+        {
+            // Arrange
+            $title = "Advanced Bean Counting";
+            $id = 5;
+            $number = "CS234";
+            $test_course = new Course($title, $id, $number);
+            $test_course->save();
+
+            $name = "Bojangles McDingles";
+            $id2 = 8;
+            $date = 3;
+            $test_student = new Student($name, $id, $date);
+            $test_student->save();
+
+            $name2 = "Tim McDingles";
+            $id3 = 56;
+            $date2 = 23;
+            $test_student2 = new Student($name2, $id3, $date2);
+            $test_student2->save();
+
+
+            //Act
+            $test_course->addStudent($test_student);
+            $test_course->addStudent($test_student2);
+
+            //Assert
+
+            $this->assertEquals($test_course->getStudents(), [$test_student, $test_student2]);
+        }
     }
 
  ?>

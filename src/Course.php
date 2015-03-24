@@ -93,14 +93,31 @@
             return $found_course;
         }
 
+        function addStudent($student)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO courses_students (course_id, student_id) VALUES ({$this->getId()}, {$student->getId()});");
+        }
 
+        function getStudents()
+        {
+            $query = $GLOBALS['DB']->query("SELECT students.* FROM
+                courses JOIN courses_students ON (courses.id = courses_students.course_id)
+                        JOIN students ON (courses_students.student_id = students.id)
+                        WHERE courses.id = {$this->getId()};");
+            $student_ids = $query->fetchAll(PDO::FETCH_ASSOC);
 
+            $students = array();
+            foreach ($student_ids as $student) {
 
-
-
+                $name = $student['name'];
+                $id = $student['id'];
+                $date = $student['date'];
+                $new_student = new Student($name, $id, $date);
+                array_push($students, $new_student);
+            }
+            return $students;
+        }
 
     }
-
-
 
 ?>
