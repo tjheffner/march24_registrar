@@ -199,6 +199,34 @@
             //Assert
             $this->assertEquals($test_student, $result);
         }
+
+        function test_getCourses()
+        {
+            //Arrange
+            $name = "Betty Crocker";
+            $id = 1;
+            $date = 1;
+            $test_student = new Student($name, $id, $date);
+            $test_student->save();
+
+            $title = "";
+            $id2 = ;
+            $number = "";
+
+            $title2 = "";
+            $id3 = ;
+            $number2 = "";
+
+            $test_course = new Course($title, $id2, $number);
+            $test_course->save()
+            $test_course2 = new Course($title, $id2, $number);
+            $test_course->save();
+
+            //Act
+
+
+            //Assert
+        }
     }
 
 ?>
