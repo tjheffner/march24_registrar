@@ -117,6 +117,7 @@
 
         function test_deleteAll()
         {
+            //Arrange
             $name1 = "Nathanael";
             $name2 = "Nathaniel";
             $id = 1;
@@ -134,6 +135,48 @@
             //Assert
             $result = Student::getAll();
             $this->assertEquals([], $result);
+        }
+
+        function test_updateStudent()
+        {
+            //Arrange
+            $name = "Bobby Knight";
+            $id = 1;
+            $date = 1;
+
+            $test_student = new Student($name, $id, $date);
+            $test_student->save();
+
+            $new_name = "Robert Knight";
+
+            //Act
+            $test_student->updateStudent($new_name);
+
+            //Assert
+            $result = $test_student->getName();
+            $this->assertEquals($new_name, $result);
+        }
+
+        function test_deleteStudent()
+        {
+            //Arrange
+            $name = "Pope Francis";
+            $id = 1;
+            $date = 1;
+            $test_student = new Student($name, $id, $date);
+            $test_student->save();
+
+            $name2 = "Tsar Nikolas";
+            $id2 = 2;
+            $test_student2 = new Student($name2, $id2, $date);
+            $test_student2->save();
+
+            //Act
+            $test_student->deleteStudent();
+
+            //Assert
+            $result = Student::getAll();
+            $this->assertEquals([$test_student2], $result);
         }
     }
 

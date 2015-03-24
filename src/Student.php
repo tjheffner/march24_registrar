@@ -69,6 +69,18 @@
             return $students;
         }
 
+        function updateStudent($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE students SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
+        function deleteStudent()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
+        }
+
+
 
 
 
