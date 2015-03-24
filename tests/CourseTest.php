@@ -175,6 +175,26 @@
             $this->assertEquals([$test_course2], $result);
         }
 
+        function test_find()
+        {
+            //Assert
+            $title = "It Goes To 11: A Study of Third Wave British Metal";
+            $id = 1;
+            $number = "MATH203";
+            $title2 = "Stonehenge: A Study of Rocks";
+            $id2 = 2;
+            $number2 = "PSY307";
+            $test_course = new Course($title, $id, $number);
+            $test_course->save();
+            $test_course2 = new Course($title2, $id2, $number2);
+            $test_course2->save();
+
+            //Act
+            $result = Course::find($test_course->getId());
+
+            //Assert
+            $this->assertEquals($test_course, $result);
+        }
     }
 
  ?>

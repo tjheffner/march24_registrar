@@ -178,6 +178,27 @@
             $result = Student::getAll();
             $this->assertEquals([$test_student2], $result);
         }
+
+        function test_find()
+        {
+            //Arrange
+            $name = "Long John Silver";
+            $id = 1;
+            $date = 1;
+            $test_student = new Student($name, $id, $date);
+            $test_student->save();
+
+            $name2 = "Tiny Tim";
+            $id2 = 2;
+            $test_student2 = new Student($name2, $id2, $date);
+            $test_student2->save();
+
+            //Act
+            $result = Student::find($test_student->getId());
+
+            //Assert
+            $this->assertEquals($test_student, $result);
+        }
     }
 
 ?>
