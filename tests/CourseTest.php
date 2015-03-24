@@ -135,6 +135,46 @@
             $this->assertEquals([], $result);
         }
 
+        function test_updateCourse()
+        {
+            //Arrange
+            $title = "The Red Panda: Humanity''s Last Hope... ?";
+            $id = 4;
+            $number = "GEO406";
+            $test_course = new Course($title, $id, $number);
+            $test_course->save();
+            $new_title = "Han Shot First: Alcohol, Violence, and Outlaws in Interplanetary Gender Relations.";
+
+            //Act
+            $test_course->updateCourse($new_title);
+
+            //Assert
+            $this->assertEquals($test_course->getTitle(), $new_title);
+        }
+
+        function test_deleteCourse()
+        {
+            //Arrange
+            $title = "Domiciles of Education: Alternative Learning Options in The Twenty-First Century And Beyond";
+            $id = 5;
+            $number = "PE116";
+            $test_course = new Course($title, $id, $number);
+            $test_course->save();
+
+            $title2 = "Bell Peppers are Fruits";
+            $id2 = 2;
+            $number2 = "WSTU551";
+            $test_course2 = new Course($title2, $id2, $number2);
+            $test_course2->save();
+
+            //Act
+            $test_course->deleteCourse();
+            $result = Course::getAll();
+
+            //Assert
+            $this->assertEquals([$test_course2], $result);
+        }
+
     }
 
  ?>
