@@ -43,7 +43,31 @@
             return $this->number;
         }
 
+        function save()
+        {
+            $statement = $GLOBALS['DB']->query("INSERT INTO courses (title, number) VALUES ('{$this->getTitle()}', '{$this->getNumber()}') RETURNING id;");
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($result['id']);
+        }
 
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM courses *;");
+        }
+
+        static function getAll()
+        {
+            $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses;");
+            $courses = array();
+            foreach($returned_courses as $course) {
+                $title = $course['title'];
+                $id = $course['id'];
+                $number = $course['number'];
+                $new_course = new Course($title, $id, $number);
+                array_push($courses, $new_course);
+            }
+            return $courses;
+        }
 
 
 
